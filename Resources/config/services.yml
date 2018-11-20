@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: false
+        public: false
+
+    Disjfa\PwaBundle\:
+        resource: './../../*'
+        exclude: './../../{Entity,Migrations,Tests}'

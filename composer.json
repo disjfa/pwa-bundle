@@ -1,0 +1,23 @@
+{
+    "name": "disjfa/pwa-bundle",
+    "description": "Pwa bundle for symfony, can also be use in glynn-admin-symfony. Create favicons and startup icons",
+    "keywords": [
+        "pwa"
+    ],
+    "type": "symfony-bundle",
+    "require": {
+        "symfony/orm-pack": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "disjfa",
+            "email": "disjfa@disjfa.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Disjfa\\PwaBundle\\": ""
+        }
+    }
+}
