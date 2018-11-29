@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container py-3">
+        {% set favicon = settings_get('pwa.favicon') %}
+        {% if favicon %}
+            {% for icon in icons %}
+                <div><strong>{{ icon }}</strong></div>
+                <img src="{{ asset(favicon) | image_resolver(icon) }}" alt="" class="img-fluid">
+                <hr>
+            {% endfor %}
+        {% else %}
+            No favicons set
+        {% endif %}
+    </div>
+{% endblock %}

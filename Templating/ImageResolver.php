@@ -2,25 +2,19 @@
 
 namespace Disjfa\PwaBundle\Templating;
 
-use GuzzleHttp\Psr7\Uri;
-use Liip\ImagineBundle\Service\FilterService;
-use PhpMob\Settings\Manager\SettingManager;
+use Disjfa\PwaBundle\Service\ImageResolverService;
 
 class ImageResolver extends \Twig_Extension
 {
-    /**
-     * @var FilterService
-     */
-    private $filterService;
-    /**
-     * @var SettingManager
-     */
-    private $settingManager;
 
-    public function __construct(FilterService $filterService, SettingManager $settingManager)
+    /**
+     * @var ImageResolverService
+     */
+    private $imageResolverService;
+
+    public function __construct(ImageResolverService $imageResolverService)
     {
-        $this->filterService = $filterService;
-        $this->settingManager = $settingManager;
+        $this->imageResolverService = $imageResolverService;
     }
 
     /**
@@ -40,13 +34,6 @@ class ImageResolver extends \Twig_Extension
      */
     public function resolver(string $path, string $filter)
     {
-        $url = new Uri($path);
-
-        $runtimeConfig = [
-            'background' => [
-                'color' => $this->settingManager->get('pwa.background_color'),
-            ],
-        ];
-        return $this->filterService->getUrlOfFilteredImageWithRuntimeFilters(ltrim($url->getPath(), '/'), $filter, $runtimeConfig);
+        return $this->imageResolverService->resolver($path, $filter);
     }
 }

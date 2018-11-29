@@ -1,0 +1,33 @@
+{% set favicon = settings_get('pwa.favicon') %}
+{% if favicon %}
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset(favicon) | image_resolver('pwa_57x57') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset(favicon) | image_resolver('pwa_60x60') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset(favicon) | image_resolver('pwa_72x72') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset(favicon) | image_resolver('pwa_76x76') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset(favicon) | image_resolver('pwa_114x114') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset(favicon) | image_resolver('pwa_120x120') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset(favicon) | image_resolver('pwa_144x144') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset(favicon) | image_resolver('pwa_152x152') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset(favicon) | image_resolver('pwa_180x180') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="{{ settings_get('pwa.name') }}">
+    <link rel="icon" type="image/png" sizes="228x228" href="{{ asset(favicon) | image_resolver('pwa_228x228') }}">
+    <link rel="manifest" href="{{ path('disjfa_pwa_manifest') }}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="{{ settings_get('pwa.theme_color') }}">
+    <meta name="application-name" content="{{ settings_get('pwa.name') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset(favicon) | image_resolver('pwa_32x32') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset(favicon) | image_resolver('pwa_16x16') }}">
+    <link rel="shortcut icon" href="{{ asset(favicon) | image_resolver('pwa_32x32') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" href="{{ asset(favicon) | image_resolver('pwa_320x460') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)" href="{{ asset(favicon) | image_resolver('pwa_640x920') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" href="{{ asset(favicon) | image_resolver('pwa_640x1096') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="{{ asset(favicon) | image_resolver('pwa_750x1294') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 3)" href="{{ asset(favicon) | image_resolver('pwa_1182x2208_landscape') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3)" href="{{ asset(favicon) | image_resolver('pwa_1242x2148_portrait') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)" href="{{ asset(favicon) | image_resolver('pwa_748x1024_landscape') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)" href="{{ asset(favicon) | image_resolver('pwa_768x1004_portrait') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)" href="{{ asset(favicon) | image_resolver('pwa_1496x2048_landscape') }}">
+    <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)" href="{{ asset(favicon) | image_resolver('pwa_1536x2008_portrait') }}">
+{% endif %}

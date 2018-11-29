@@ -6,7 +6,11 @@
     ],
     "type": "symfony-bundle",
     "require": {
-        "symfony/orm-pack": "^1.0"
+        "symfony/orm-pack": "^1.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "phpmob/settings-bundle": "^1.2",
+        "liip/imagine-bundle": "^2.1",
+        "symfony/twig-bundle": "^4.1"
     },
     "license": "MIT",
     "authors": [

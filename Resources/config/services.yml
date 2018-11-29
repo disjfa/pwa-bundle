@@ -16,3 +16,6 @@ services:
         arguments:
         - '@phpmob.settings.template_helper'
 
+    Disjfa\PwaBundle\Service\ImageResolverService:
+        $publicPath: '%env(PWA_PUBLIC_PATH)%'
+        $rootDir: '%kernel.project_dir%'
