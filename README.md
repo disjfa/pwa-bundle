@@ -20,6 +20,14 @@ For a simple setup copy the icon from the bundle public folder to check it out.
 cp vendor/disjfa/pwa-bundle/Resources/public/pwa-icon.png public/
 ```
 
+## Usage
+
+In your header you can include the meta file
+
+```twig
+{{ include('@DisjfaPwa/meta.html.twig') }}
+```
+
 ## Manual setup
 
 This is an example using symfony 4, for symfony 3 add the routes to the `router.yml` and add the settings to the `config.yml`.
