@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\Psr7\Uri;
 use Liip\ImagineBundle\Service\FilterService;
 use PhpMob\Settings\Manager\SettingManager;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ImageResolverService
@@ -62,11 +63,22 @@ class ImageResolverService
     public function resolver(string $path, string $filter)
     {
         $url = new Uri($path);
+        try {
+            $file = new File($this->publicFolder . $url->getPath());
+        } catch (FileNotFoundException $e) {
+            return '';
+        }
+
+        if (false === in_array($file->getExtension(), ['png', 'jpg', 'jpeg'])) {
+            return '';
+        }
+
         $runtimeConfig = [
             'background' => [
                 'color' => $this->settingManager->get('pwa.background_color'),
             ],
         ];
+        
         return $this->filterService->getUrlOfFilteredImageWithRuntimeFilters(ltrim($url->getPath(), '/'), $filter, $runtimeConfig);
     }
 }
