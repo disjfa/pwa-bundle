@@ -20,7 +20,7 @@ class PwaController extends Controller
     private $imageResolverService;
 
     /**
-     * @param SettingHelper $settingHelper
+     * @param SettingHelper        $settingHelper
      * @param ImageResolverService $imageResolverService
      */
     public function __construct(SettingHelper $settingHelper, ImageResolverService $imageResolverService)
@@ -52,9 +52,9 @@ class PwaController extends Controller
         $icons = [];
         foreach ($manifestIcons as $iconSize) {
             $icons[] = [
-                'src' => $this->imageResolverService->resolver($favicon, 'pwa_' . $iconSize),
-                "sizes" => $iconSize,
-                "type" => $mimeType,
+                'src' => $this->imageResolverService->resolver($favicon, 'pwa_'.$iconSize),
+                'sizes' => $iconSize,
+                'type' => $mimeType,
             ];
         }
 
@@ -76,7 +76,7 @@ class PwaController extends Controller
     {
         $icons = [];
         foreach (array_keys($this->getParameter('liip_imagine.filter_sets')) as $item) {
-            if (!preg_match('/^pwa/', $item)) {
+            if ( ! preg_match('/^pwa/', $item)) {
                 continue;
             }
             $icons[] = $item;

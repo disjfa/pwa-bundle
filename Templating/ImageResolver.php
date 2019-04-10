@@ -6,7 +6,6 @@ use Disjfa\PwaBundle\Service\ImageResolverService;
 
 class ImageResolver extends \Twig_Extension
 {
-
     /**
      * @var ImageResolverService
      */
@@ -30,6 +29,7 @@ class ImageResolver extends \Twig_Extension
     /**
      * @param string $path
      * @param string $filter
+     *
      * @return string
      */
     public function resolver(string $path, string $filter)
