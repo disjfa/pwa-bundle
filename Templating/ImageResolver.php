@@ -3,8 +3,10 @@
 namespace Disjfa\PwaBundle\Templating;
 
 use Disjfa\PwaBundle\Service\ImageResolverService;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class ImageResolver extends \Twig_Extension
+class ImageResolver extends AbstractExtension
 {
     /**
      * @var ImageResolverService
@@ -22,14 +24,11 @@ class ImageResolver extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('image_resolver', [$this, 'resolver']),
+            new TwigFilter('image_resolver', [$this, 'resolver']),
         ];
     }
 
     /**
-     * @param string $path
-     * @param string $filter
-     *
      * @return string
      */
     public function resolver(string $path, string $filter)

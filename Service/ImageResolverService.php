@@ -27,11 +27,6 @@ class ImageResolverService
     /**
      * ImageResolverService constructor.
      *
-     * @param string         $publicPath
-     * @param string         $rootDir
-     * @param FilterService  $filterService
-     * @param SettingManager $settingManager
-     *
      * @throws Exception
      */
     public function __construct(string $publicPath, string $rootDir, FilterService $filterService, SettingManager $settingManager)
@@ -46,8 +41,6 @@ class ImageResolverService
     }
 
     /**
-     * @param string $path
-     *
      * @return string|null
      */
     public function getMimeType(string $path)
@@ -59,9 +52,6 @@ class ImageResolverService
     }
 
     /**
-     * @param string $path
-     * @param string $filter
-     *
      * @return string
      */
     public function resolver(string $path, string $filter)
