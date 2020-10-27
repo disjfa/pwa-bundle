@@ -7,6 +7,7 @@ use PhpMob\SettingsBundle\Twig\Helper\SettingHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\RouterInterface;
 
 class PwaController extends AbstractController
 {
@@ -18,11 +19,16 @@ class PwaController extends AbstractController
      * @var ImageResolverService
      */
     private $imageResolverService;
+    /**
+     * @var RouterInterface
+     */
+    private $router;
 
-    public function __construct(SettingHelper $settingHelper, ImageResolverService $imageResolverService)
+    public function __construct(SettingHelper $settingHelper, ImageResolverService $imageResolverService, RouterInterface $router)
     {
         $this->settingHelper = $settingHelper;
         $this->imageResolverService = $imageResolverService;
+        $this->router = $router;
     }
 
     /**
@@ -48,11 +54,16 @@ class PwaController extends AbstractController
         $icons = [];
         foreach ($manifestIcons as $iconSize) {
             $icons[] = [
-                'src' => $this->imageResolverService->resolver($favicon, 'pwa_'.$iconSize),
+                'src' => $this->imageResolverService->resolver($favicon, 'pwa_' . $iconSize),
                 'sizes' => $iconSize,
                 'type' => $mimeType,
             ];
         }
+        $relatedApplications = [];
+        $relatedApplications[] = [
+            'platform' => 'webapp',
+            'url' => $this->router->generate('disjfa_pwa_manifest', [], RouterInterface::ABSOLUTE_URL),
+        ];
 
         return new JsonResponse([
             'name' => $this->settingHelper->get('pwa.name'),
@@ -61,6 +72,7 @@ class PwaController extends AbstractController
             'display' => $this->settingHelper->get('pwa.display'),
             'background_color' => $this->settingHelper->get('pwa.background_color'),
             'theme_color' => $this->settingHelper->get('pwa.theme_color'),
+            'related_applications' => $relatedApplications,
             'icons' => $icons,
         ]);
     }
@@ -72,7 +84,7 @@ class PwaController extends AbstractController
     {
         $icons = [];
         foreach (array_keys($this->getParameter('liip_imagine.filter_sets')) as $item) {
-            if ( ! preg_match('/^pwa/', $item)) {
+            if (!preg_match('/^pwa/', $item)) {
                 continue;
             }
             $icons[] = $item;
