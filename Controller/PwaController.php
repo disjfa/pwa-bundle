@@ -3,7 +3,6 @@
 namespace Disjfa\PwaBundle\Controller;
 
 use Disjfa\PwaBundle\Service\ImageResolverService;
-use PhpMob\SettingsBundle\Twig\Helper\SettingHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,9 +23,8 @@ class PwaController extends AbstractController
      */
     private $router;
 
-    public function __construct(SettingHelper $settingHelper, ImageResolverService $imageResolverService, RouterInterface $router)
+    public function __construct(ImageResolverService $imageResolverService, RouterInterface $router)
     {
-        $this->settingHelper = $settingHelper;
         $this->imageResolverService = $imageResolverService;
         $this->router = $router;
     }

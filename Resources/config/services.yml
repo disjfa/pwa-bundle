@@ -12,9 +12,9 @@ services:
         resource: '../../Controller'
         tags: ['controller.service_arguments']
 
-    Disjfa\PwaBundle\Controller\PwaController:
-        arguments:
-        - '@phpmob.settings.template_helper'
+#    Disjfa\PwaBundle\Controller\PwaController:
+#        arguments:
+#        - '@phpmob.settings.template_helper'
 
     Disjfa\PwaBundle\Service\ImageResolverService:
         $publicPath: '%env(PWA_PUBLIC_PATH)%'

@@ -5,7 +5,6 @@ namespace Disjfa\PwaBundle\Service;
 use Exception;
 use GuzzleHttp\Psr7\Uri;
 use Liip\ImagineBundle\Service\FilterService;
-use PhpMob\Settings\Manager\SettingManager;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -29,7 +28,7 @@ class ImageResolverService
      *
      * @throws Exception
      */
-    public function __construct(string $publicPath, string $rootDir, FilterService $filterService, SettingManager $settingManager)
+    public function __construct(string $publicPath, string $rootDir, FilterService $filterService)
     {
         $this->publicFolder = realpath($rootDir.$publicPath);
         if (null === $this->publicFolder) {
@@ -37,7 +36,6 @@ class ImageResolverService
         }
 
         $this->filterService = $filterService;
-        $this->settingManager = $settingManager;
     }
 
     /**
