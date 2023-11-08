@@ -40,86 +40,17 @@ disjfa_pwa:
     type:     annotation
 ```
 
-Setup the phpmob settings bundle, (`config/packages/phpmob_settings.yaml`)
-
-```
-# use with doctrine orm
-doctrine:
-    orm:
-        mappings:
-            PhpMobSettings:
-                type: xml
-                is_bundle: false
-                prefix: PhpMob\Settings\Model
-                dir: '%kernel.project_dir%/vendor/phpmob/settings-bundle/src/Resources/config/doctrine/model'
-```
-
 Settings, (`config/packages/disjfa_pwa.yaml`)
 
 ```
-phpmob_settings:
-    schemas:
-        pwa:
-            label: Pwa settings
-            settings:
-                name:
-                    label: Name
-                    value: Your website name
-                    blueprint:
-                        options:
-                            required: true
-                short_name:
-                    label: Short name
-                    value: Short name
-                    blueprint:
-                        options:
-                            required: true
-                start_url:
-                    label: Start url
-                    value: /
-                    blueprint:
-                        options:
-                            required: true
-                display:
-                    label: Display
-                    value: standalone
-                    blueprint:
-                        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
-                        options:
-                            required: true
-                            expanded: true
-                            choices:
-                                standalone: standalone
-                                fullscreen: fullscreen
-                                browser: browser
-                orientation:
-                    label: Orientation
-                    value: any
-                    blueprint:
-                        type: Symfony\Component\Form\Extension\Core\Type\ChoiceType
-                        options:
-                            required: true
-                            expanded: true
-                            choices:
-                                any: any
-                                natural: natural
-                                landscape: landscape
-                                portrait: portrait
-                background_color:
-                    label: Background color
-                    value: '#2ecc71'
-                    blueprint:
-                        type: Symfony\Component\Form\Extension\Core\Type\ColorType
-                theme_color:
-                    label: Theme color
-                    value: '#2980b9'
-                    blueprint:
-                        type: Symfony\Component\Form\Extension\Core\Type\ColorType
-                favicon:
-                    label: Icon
-                    value: '/pwa-icon.png'
-                    blueprint:
-                        type: Disjfa\MediaBundle\Form\Type\MediaType
+parameters:
+    disjfa_pwa.favicon: /pwa-icon.png
+    disjfa_pwa.background_color: '#000000'
+    disjfa_pwa.theme_color: '#ecf0f1'
+    disjfa_pwa.name: 'App name'
+    disjfa_pwa.short_name: 'App name'
+    disjfa_pwa.start_url: '/?start'
+    disjfa_pwa.display: 'standalone'
 
 liip_imagine:
     filter_sets:

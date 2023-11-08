@@ -4,6 +4,8 @@ namespace Disjfa\PwaBundle\Controller;
 
 use Disjfa\PwaBundle\Service\ImageResolverService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -23,6 +25,11 @@ class PwaController extends AbstractController
      */
     private $router;
 
+    /**
+     * @var ParameterBagInterface
+     */
+    private $parameterBag;
+
     public function __construct(ImageResolverService $imageResolverService, RouterInterface $router)
     {
         $this->imageResolverService = $imageResolverService;
@@ -34,7 +41,13 @@ class PwaController extends AbstractController
      */
     public function manifestAction()
     {
-        $favicon = $this->settingHelper->get('pwa.favicon');
+
+        try {
+            $favicon = $this->getParameter('disjfa_pwa.favicon');
+        } catch (ParameterNotFoundException $exception) {
+            return new JsonResponse([]);
+        }
+
         $mimeType = $this->imageResolverService->getMimeType($favicon);
         $manifestIcons = [
             '36x36',
@@ -64,12 +77,12 @@ class PwaController extends AbstractController
         ];
 
         return new JsonResponse([
-            'name' => $this->settingHelper->get('pwa.name'),
-            'short_name' => $this->settingHelper->get('pwa.short_name'),
-            'start_url' => $this->settingHelper->get('pwa.start_url'),
-            'display' => $this->settingHelper->get('pwa.display'),
-            'background_color' => $this->settingHelper->get('pwa.background_color'),
-            'theme_color' => $this->settingHelper->get('pwa.theme_color'),
+            'name' => $this->getParameter('disjfa_pwa.name'),
+            'short_name' => $this->getParameter('disjfa_pwa.short_name'),
+            'start_url' => $this->getParameter('disjfa_pwa.start_url'),
+            'display' => $this->getParameter('disjfa_pwa.display'),
+            'background_color' => $this->getParameter('disjfa_pwa.background_color'),
+            'theme_color' => $this->getParameter('disjfa_pwa.theme_color'),
             'related_applications' => $relatedApplications,
             'icons' => $icons,
         ]);

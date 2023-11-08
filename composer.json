@@ -8,6 +8,7 @@
     "require": {
         "liip/imagine-bundle": "^2.1",
         "symfony/orm-pack": "^1|^2",
+        "nyholm/psr7": "^1",
         "symfony/twig-bundle": "^6"
     },
     "license": "MIT",

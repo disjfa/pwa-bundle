@@ -3,8 +3,9 @@
 namespace Disjfa\PwaBundle\Service;
 
 use Exception;
-use GuzzleHttp\Psr7\Uri;
 use Liip\ImagineBundle\Service\FilterService;
+use Nyholm\Psr7\Uri;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -15,9 +16,9 @@ class ImageResolverService
      */
     private $filterService;
     /**
-     * @var SettingManager
+     * @var ParameterBagInterface
      */
-    private $settingManager;
+    private $parameterBag;
     /**
      * @var bool|string
      */
@@ -28,14 +29,15 @@ class ImageResolverService
      *
      * @throws Exception
      */
-    public function __construct(string $publicPath, string $rootDir, FilterService $filterService)
+    public function __construct(string $publicPath, string $rootDir, FilterService $filterService, ParameterBagInterface $parameterBag)
     {
-        $this->publicFolder = realpath($rootDir.$publicPath);
+        $this->publicFolder = realpath($rootDir . $publicPath);
         if (null === $this->publicFolder) {
-            throw new Exception('Path does not exists: '.$rootDir.$publicPath);
+            throw new Exception('Path does not exists: ' . $rootDir . $publicPath);
         }
 
         $this->filterService = $filterService;
+        $this->parameterBag = $parameterBag;
     }
 
     /**
@@ -44,7 +46,7 @@ class ImageResolverService
     public function getMimeType(string $path)
     {
         $url = new Uri($path);
-        $file = new File($this->publicFolder.$url->getPath());
+        $file = new File($this->publicFolder . $url->getPath());
 
         return $file->getMimeType();
     }
@@ -56,7 +58,7 @@ class ImageResolverService
     {
         $url = new Uri($path);
         try {
-            $file = new File($this->publicFolder.$url->getPath());
+            $file = new File($this->publicFolder . $url->getPath());
         } catch (FileNotFoundException $e) {
             return '';
         }
@@ -65,11 +67,12 @@ class ImageResolverService
             return '';
         }
 
-        $runtimeConfig = [
-            'background' => [
-                'color' => $this->settingManager->get('pwa.background_color'),
-            ],
-        ];
+        $runtimeConfig = [];
+        if ($this->parameterBag->has('disjfa_pwa.background_color')) {
+            $runtimeConfig['background'] = [
+                'color' => $this->parameterBag->get('disjfa_pwa.background_color'),
+            ];
+        }
 
         return $this->filterService->getUrlOfFilteredImageWithRuntimeFilters(ltrim($url->getPath(), '/'), $filter, $runtimeConfig);
     }

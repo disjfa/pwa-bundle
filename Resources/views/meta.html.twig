@@ -1,5 +1,4 @@
-{#{% set favicon = settings_get('pwa.favicon') %}#}
-{% set favicon = false %}
+{% set favicon = pwa_settings('favicon') %}
 {% if favicon %}
     <link rel="apple-touch-icon" sizes="57x57" href="{{ asset(favicon) | image_resolver('pwa_57x57') }}">
     <link rel="apple-touch-icon" sizes="60x60" href="{{ asset(favicon) | image_resolver('pwa_60x60') }}">
@@ -12,12 +11,12 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset(favicon) | image_resolver('pwa_180x180') }}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="{# {{ settings_get('pwa.name') }} #}">
+    <meta name="apple-mobile-web-app-title" content="{{ pwa_settings('name') }}">
     <link rel="icon" type="image/png" sizes="228x228" href="{{ asset(favicon) | image_resolver('pwa_228x228') }}">
     <link rel="manifest" href="{{ path('disjfa_pwa_manifest') }}">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="{# {{ settings_get('pwa.theme_color') }} #}">
-    <meta name="application-name" content="{# {{ settings_get('pwa.name') }} #}">
+    <meta name="theme-color" content="{{ pwa_settings('theme_color') }}">
+    <meta name="application-name" content="{{ pwa_settings('name') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset(favicon) | image_resolver('pwa_32x32') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset(favicon) | image_resolver('pwa_16x16') }}">
     <link rel="shortcut icon" href="{{ asset(favicon) | image_resolver('pwa_32x32') }}">

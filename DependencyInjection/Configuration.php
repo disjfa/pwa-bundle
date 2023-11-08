@@ -17,6 +17,11 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        return new TreeBuilder('disjfa_pwa');
+        $treeBuilder = new TreeBuilder('disjfa_pwa');
+
+        $treeBuilder->getRootNode()->children()
+            ->variableNode('favicon')->defaultNull();
+
+        return $treeBuilder;
     }
 }
